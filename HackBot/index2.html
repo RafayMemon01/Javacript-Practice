@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev ice</title>
+
+    <style>
+      body {
+        background-color: black;
+        color: rgb(0, 84, 0);
+        font-family: "Fira Code", monospace;
+      }
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+    </style>
+  </head>
+  <body>
+    <!-- <div>Initializing Hacking...</div> -->
+
+    <script>
+      let text = [
+        "Initialized Hacking now reading your data",
+        "Reading your Files",
+        "Password files Detected",
+        "Sending all passwords and personal files to server",
+        "Cleaning up"
+      ];
+
+      const randomDelay = () => {
+        return new Promise((resolve) => {
+          let timeout = 1 + 5 * Math.random();
+          setTimeout(() => {
+            resolve();
+          }, timeout * 1000);
+        });
+      };
+
+      const addItem = async (item) => {
+        await randomDelay();
+        let div = document.createElement("div");
+        div.innerHTML = item;
+        document.body.append(div);
+      };
+
+      // Loading animation for the last message
+      let t = setInterval(() => {
+        let last = document.body.getElementsByTagName("div");
+        if (last.length > 0) {
+          last = last[last.length - 1];
+          if (last.innerHTML.endsWith("...")) {
+            last.innerHTML = last.innerHTML.slice(0, last.innerHTML.length - 3);
+          } else {
+            last.innerHTML += ".";
+          }
+        }
+      }, 300);
+
+      (async () => {
+        for (const item of text) {
+          await addItem(item);
+        }
+
+        await randomDelay();
+        clearInterval(t); // Stop the animation
+        
+        setTimeout(() => {
+            document.body.innerHTML = ""
+          window.close();
+        }, 2000); // Close the tab after 2 seconds
+      })();
+    </script>
+  </body>
+</html>
